@@ -1,33 +1,6 @@
-<div class='form-group'>
-  <label for='item'>Item</label>
-  <input class='form-control'
-         #pizza
-         name='item'>
-  <input type="button"
-         (click)='add(pizza)'
-         class="btn btn-success"
-         value="Add Item">
-</div>
+<app-entry (itemAdded)="add($event)"></app-entry>
 <section>
-  <ul class='list-unstyled'>
-    <li class="alert"
-        [ngClass]="{'alert-info':
-        !item.completed, 'alert-success'
-        :
-        item.completed}"
-        *ngFor="let item of items">
-      <input type="button"
-             (click)="markComplete(item)"
-             *ngIf="!item.completed"
-             class="btn btn-sm btn-danger"
-             value="X">
-      <span [ngClass]="{'completed': item.completed}"> {{item.description}}</span>
-    </li>
-
-  </ul>
-  <input type="button"
-         (click)='removeCompleted()'
-         class="btn btn-success"
-         value="RemoveCompleted">
-
+  <app-list [list]="items"
+            (clearList)="removeCompleted()"
+            (completedItem)="markComplete($event)"></app-list>
 </section>
