@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TodoListItem } from './models';
+import { TodoDataService } from './todo-data.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -7,22 +9,39 @@ import { TodoListItem } from './models';
   styleUrls: ['./todo-list.component.css']
 })
 
-export class TodoListComponent {
-  items: TodoListItem[] = [
-    { description: 'fix front door', completed: false },
-    { description: 'change bathroom lightbulb', completed: false },
-    { description: 'kill thisles', completed: true }
-  ];
+export class TodoListComponent implements OnInit, OnDestroy {
+  items$: Observable<TodoListItem[]>;
+  // items: TodoListItem[];
+  // subscription: Subscription;
+
+  constructor(private service: TodoDataService) { }
+
+  ngOnInit() {
+    this.items$ = this.service.getTodoList();
+
+    // this.subscription = this.items$.subscribe(tdl => {
+    // console.log('got a new todo list!', tdl);
+    // this.items = tdl;
+    // });
+  }
+
+  ngOnDestroy() {
+    // this.subscription.unsubscribe();
+  }
 
   markComplete(item: TodoListItem) {
-    item.completed = true;
+    // item.completed = true;
+    // call the service ...
   }
 
   add(what: string) {
-    this.items.unshift({ description: what, completed: false });
+    // this.items.unshift({ description: what, completed: false });
+    // TODO: a call to the service to add this new todo
+    this.service.add(what);
   }
 
   removeCompleted() {
-    this.items = this.items.filter(item => item.completed === false);
+    // this.items = this.items.filter(item => item.completed === false);
+    // replace with service call...
   }
 }
