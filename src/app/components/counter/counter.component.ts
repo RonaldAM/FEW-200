@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State, selectCurrentCount } from '../../reducers';
+import { State, selectCurrentCount, selectAtTheStart, selectCountingBy, selectCantDecrement } from '../../reducers';
 import { Observable } from 'rxjs';
+import * as counterActions from '../../actions/counter.actions';
 @Component({
   selector: 'app-counter',
   templateUrl: './counter.component.html',
@@ -10,19 +11,29 @@ import { Observable } from 'rxjs';
 export class CounterComponent implements OnInit {
 
   count$: Observable<number>;
+  cantDecrement$: Observable<boolean>;
+  by$: Observable<number>;
+  atTheStart$: Observable<boolean>;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
     this.count$ = this.store.select(selectCurrentCount);
+    this.atTheStart$ = this.store.select(selectAtTheStart);
+    this.by$ = this.store.select(selectCountingBy);
+    this.cantDecrement$ = this.store.select(selectCantDecrement);
   }
 
   increment() {
-    this.store.dispatch({ type: 'increment' });
+    this.store.dispatch(new counterActions.CountIncremented());
   }
   decrement() {
-    this.store.dispatch({ type: 'decrement' });
+    this.store.dispatch(new counterActions.CountDecremented());
   }
   reset() {
-    this.store.dispatch({ type: 'reset' });
+    this.store.dispatch(new counterActions.CountReset());
+  }
+
+  setCountBy(what: number) {
+    this.store.dispatch(new counterActions.CountBySet(what));
   }
 }
