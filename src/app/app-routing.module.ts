@@ -5,29 +5,38 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TipCalculatorComponent } from './components/tip-calculator/tip-calculator.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { ShoppingComponent } from './features/shopping/shopping.component';
+import { BooksComponent } from './features/books/books.component';
 
-const routes: Routes = [{
-  path: 'dashboard',
-  component: DashboardComponent
-}, {
-  path: 'todo-list',
-  component: TodoListComponent
-}, {
-  path: 'tip-calculator',
-  component: TipCalculatorComponent
-},
-{
-  path: 'counter',
-  component: CounterComponent
-},
-{
-  path: 'shopping',
-  component: ShoppingComponent
-},
-{
-  path: '**',
-  redirectTo: 'dashboard'
-}];
+const routes: Routes = [
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'todo-list',
+    component: TodoListComponent
+  },
+  {
+    path: 'tip-calculator',
+    component: TipCalculatorComponent
+  },
+  {
+    path: 'counter',
+    component: CounterComponent
+  },
+  {
+    path: 'shopping',
+    component: ShoppingComponent
+  },
+  {
+    path: 'books',
+    component: BooksComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

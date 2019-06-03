@@ -7,18 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TipCalculatorComponent implements OnInit {
 
-  amount = 0;
-  tipPercent = .20;
-
   constructor() { }
 
-  ngOnInit() {
-  }
+
+  amount = 0;
+  tipPercent = .20;
 
   updateAmount(amount: number) {
 
     this.amount = amount;
-    console.log(amount);
+  }
+
+  ngOnInit() {
   }
 
   setTipPercent(percent: number) {

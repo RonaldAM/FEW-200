@@ -1,5 +1,5 @@
-// use ngrxa [tab] for snippet
 import { Action } from '@ngrx/store';
+
 export const INCREMENT = '[counter] increment';
 export class CountIncremented implements Action {
   readonly type = INCREMENT;
@@ -18,15 +18,18 @@ export class CountReset implements Action {
   constructor() { }
 }
 
+
 export const SET_COUNT_BY = '[counter] set count by';
 export class CountBySet implements Action {
   readonly type = SET_COUNT_BY;
   constructor(public by: number) { }
 }
 
-// discriminated union type
 
-export type ALL =
+
+// Discriminated Union Type (for more information, see typescriptlang.org)
+
+export type All =
   CountIncremented
   | CountDecremented
   | CountReset

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 import { State, selectCurrentCount, selectAtTheStart, selectCountingBy, selectCantDecrement } from '../../reducers';
 import { Observable } from 'rxjs';
 import * as counterActions from '../../actions/counter.actions';
@@ -18,14 +18,17 @@ export class CounterComponent implements OnInit {
 
   ngOnInit() {
     this.count$ = this.store.select(selectCurrentCount);
-    this.atTheStart$ = this.store.select(selectAtTheStart);
     this.by$ = this.store.select(selectCountingBy);
     this.cantDecrement$ = this.store.select(selectCantDecrement);
+    this.atTheStart$ = this.store.select(selectAtTheStart);
   }
 
   increment() {
+
+    // this.count = this.count + 1;
     this.store.dispatch(new counterActions.CountIncremented());
   }
+
   decrement() {
     this.store.dispatch(new counterActions.CountDecremented());
   }
@@ -35,5 +38,6 @@ export class CounterComponent implements OnInit {
 
   setCountBy(what: number) {
     this.store.dispatch(new counterActions.CountBySet(what));
+    // localStorage.setItem('counting-by', what.toString());
   }
 }

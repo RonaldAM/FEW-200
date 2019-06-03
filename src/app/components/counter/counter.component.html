@@ -6,12 +6,12 @@
          [disabled]="cantDecrement$ | async"
          (click)="decrement()">
   <input type="button"
-         class="btn  btn-primary btn-sm"
+         class="btn btn-primary btn-sm"
          value="+"
          (click)="increment()">
   <input type="button"
-         class="btn  btn-primary btn-sm"
-         value="reset"
+         class="btn btn-primary btn-sm"
+         value="RESET"
          [disabled]="atTheStart$ | async"
          (click)="reset()">
 </div>
@@ -20,15 +20,14 @@
      aria-label="Basic example">
   <button type="button"
           (click)="setCountBy(1)"
-          [disabled]="(by$ | async)===1"
+          [disabled]="(by$ | async) === 1"
           class="btn btn-secondary">1</button>
   <button type="button"
           (click)="setCountBy(3)"
-          [disabled]="(by$ | async)===3"
+          [disabled]="(by$ | async) === 3"
           class="btn btn-secondary">3</button>
   <button type="button"
           (click)="setCountBy(5)"
-          [disabled]="(by$ | async)===5"
+          [disabled]="(by$ | async) === 5"
           class="btn btn-secondary">5</button>
 </div>
-<pre>{{by$ | async | json}}</pre>

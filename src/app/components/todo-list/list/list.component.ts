@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TodoListItem } from '../models';
-import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -10,17 +9,21 @@ import { EventEmitter } from '@angular/core';
 export class ListComponent implements OnInit {
 
   @Input() list: TodoListItem[];
-  @Output() clearList = new EventEmitter();
-  @Output() completedItem = new EventEmitter<TodoListItem>();
+  @Output() completedCleared = new EventEmitter();
+  @Output() markedComplete = new EventEmitter<TodoListItem>();
   constructor() { }
 
   ngOnInit() {
   }
 
+
   markComplete(item: TodoListItem) {
-    this.completedItem.emit(item);
+    this.markedComplete.emit(item);
   }
-  removeCompleted() {
-    this.clearList.emit();
+
+  clearCompleted() {
+    this.completedCleared.emit();
   }
+
+
 }
